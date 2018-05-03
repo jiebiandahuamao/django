@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block css %}
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'css/message.css' %}" media="all" />
+{% endblock %}
+{% block contend %}
+	<form class="layui-form">
+		<blockquote class="layui-elem-quote news_search">
+			<div class="layui-inline selectMsg">
+				<select name="msgColl" lay-filter="selectMsg">
+					<option value="0">全部</option>
+			        <option value="1">已收藏</option>
+			    </select>
+			</div>
+			<div class="layui-inline">
+				<div class="layui-form-mid layui-word-aux">本页所有数据均为静态，刷新后所有操作无效</div>
+			</div>
+		</blockquote>
+		<table class="layui-table msg_box" lay-skin="line">
+			<colgroup>
+				<col width="45%">
+				<col width="25%">
+				<col width="15%">
+				<col>
+			</colgroup>
+			<tbody class="msgHtml"></tbody>
+		</table>
+	</form>
+
+{% endblock %}
+{% block script %}
+	<script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/message.js'%}"></script>
+{% endblock %}

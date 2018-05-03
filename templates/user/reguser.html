@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>会员添加--layui后台管理模板</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="format-detection" content="telephone=no">
+    {% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'layui/css/layui.css' %}" media="all" />
+	<style type="text/css">
+		.layui-form-item .layui-inline{ width:33.333%; float:left; margin-right:0; }
+		@media(max-width:1240px){
+			.layui-form-item .layui-inline{ width:100%; float:none; }
+		}
+	</style>
+</head>
+<body class="childrenBody">
+	<form class="layui-form" style="width:80%;" action="{% url 'reg' %}" method="post">
+		<div class="layui-form-item">
+			<label class="layui-form-label">邮箱</label>
+			<div class="layui-input-block">
+				<input type="text" name="email" value="{{ register_form.email.value }}" class="layui-input userName" lay-verify="required" placeholder="请输入登录名">
+			</div>
+		</div>
+		<div class="layui-form-item">
+			<label class="layui-form-label">密码</label>
+			<div class="layui-input-block">
+				<input type="text" name="password" value="{{ register_form.password.value }}" class="layui-input userEmail"  placeholder="请输入邮箱">
+			</div>
+		</div>
+        <div class="layui-form-item">
+        <label class="layui-form-label">验证码</label>
+{#        <div class="layui-input-block">#}
+{#				<input class="layui-input" name="captcha" placeholder="验证码" lay-verify="required" type="text" autocomplete="off">#}
+{#				<div class="code"><img src="{% static 'images/code.jpg' %}" width="116" height="36"></div>#}
+{#		    </div>#}
+            {{ register_form.captcha }}
+        </div>
+		<div class="layui-form-item">
+			<div class="layui-input-block">
+				<button class="layui-btn" type="submit">立即提交</button>
+				<button type="reset" class="layui-btn layui-btn-primary">重置</button>
+		    </div>
+		</div>
+        <button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger">{{ msg }}</button>
+        {% if register_form.errors %}
+            {% for key,error in register_form.errors.items %}<button class="layui-btn layui-btn-sm layui-btn-radius layui-btn-danger">{{ error }}</button>{% endfor %}
+            {% else %}
+            {% endif %}
+        {% csrf_token %}
+	</form>
+	<script type="text/javascript" src="{% static 'layui/layui.js' %}"></script>
+{#	<script type="text/javascript" src="{% static 'js/reguser.js' %}"></script>#}
+</body>
+</html>
